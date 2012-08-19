@@ -35,8 +35,8 @@ public class FireStorm extends AttackType{
 
 		xCenter = 10;
 		yCenter = -10;
-		
-		
+
+
 		name = "Fire Storm";
 	}
 

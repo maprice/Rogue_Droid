@@ -88,7 +88,7 @@ public class Menu {
 			break;
 		}
 
-		
+
 		Paint pt = new Paint();
 		pt.setAntiAlias(true);
 		pt.setColor(Color.WHITE);
@@ -96,7 +96,7 @@ public class Menu {
 		c.drawText("Skills", 64, 800-30, pt);
 		c.drawText("Equip", 64+140, 800-30, pt);
 		c.drawText("System", 60+282, 800-30, pt);
-		
+
 	}
 
 	public boolean checkTab(float mX, float mY){
@@ -118,7 +118,7 @@ public class Menu {
 		if(newView != view){
 			selected.x = 0;
 			selected.y = 0;
-			
+
 			System.out.println(view);
 			bg.recycle();
 			switch(view){
@@ -145,42 +145,42 @@ public class Menu {
 
 	public void skills(Canvas c, float mX, float mY, float uX, float uY, boolean hold) {
 		//c.drawBitmap(bg, 0, 0, null);
-		
-		
-		
 
-		
-		
-		
+
+
+
+
+
+
 		x = mX;
 		y = mY;
 		this.uX = uX;
 		this.uY = uY;
 		this.hold = hold;
 
-		
+
 		//drawEquip(c);
 		drawItems(c);
-//drawStats(c);
-		
-		
-		
-		
+		//drawStats(c);
+
+
+
+
 		for(int i = 0; i < character.currentSkills.length; i++){
 			c.drawBitmap(character.currentSkills[i].getIcon(), 70+i*85, 50, null);
-			
+
 		}
-		
+
 		for(int i = 0; i < character.allSkills.length; i++){
 			c.drawBitmap(character.allSkills[i].getIcon(), 30+i*85, 130, null);
-			
+
 		}
-		
+
 		slot = getInputSkill(x,y);
 
-	//	x = skill
+		//	x = skill
 		if(!pickUp){
-		//if(true){
+			//if(true){
 			if(selected.y == -1){
 				/*
 				switch(selected.x){
@@ -209,9 +209,9 @@ public class Menu {
 					//	c.drawBitmap(icon2, 95 + (1*217), 23 + 1*icon2.getHeight() , null);
 					break;
 				}
-				*/
+				 */
 				//System.out.println("neg");
-				
+
 				if(selected.x < 4){
 					System.out.println("het");
 					c.drawBitmap(iconSkill,70-5+selected.x*85, 50-5 , null);
@@ -219,7 +219,7 @@ public class Menu {
 				else{
 					c.drawBitmap(iconSkill, 30-5+(selected.x-4)*85, 130-5, null);
 				}
-				
+
 			}
 			else{
 				c.drawBitmap(iconItem, 23 + selected.x*iconItem.getWidth(), 366+4 + selected.y*iconItem.getHeight() , null);
@@ -229,8 +229,8 @@ public class Menu {
 
 		Item temp;
 		if(!hold){
-		
-			
+
+
 			slot = getInputSkill(uX,uY);
 			if( getInputSkill(uX,uY) != null && pickUp && valid(slot, dragNum)){
 
@@ -288,14 +288,14 @@ public class Menu {
 		}
 
 		//	System.out.println(slot);
-	/*	if(!dragging && hold && slot!= null){ 
+		/*	if(!dragging && hold && slot!= null){ 
 			System.out.println("Selected");
 			selected = slot;
 			drx = x;
 			dry = y;
 			//dragging = true;
 		}
-		*/
+		 */
 		if(!dragging && hold && slot!= null){ 
 			System.out.println("Selected");
 			selected = slot;
@@ -329,7 +329,7 @@ public class Menu {
 			if(slot != null){
 				if(slot.y == -1){
 					if(slot.x<4){
-					drawToolTipSkill(c, character.currentSkills[slot.x]);
+						drawToolTipSkill(c, character.currentSkills[slot.x]);
 					}
 					else{
 						drawToolTipSkill(c, character.allSkills[slot.x]);	
@@ -343,20 +343,20 @@ public class Menu {
 		}
 		else{
 			if(selected.y == -1){
-				
-				
+
+
 				if(selected.x < 4){
-				drawToolTipSkill(c, character.currentSkills[selected.x]);
+					drawToolTipSkill(c, character.currentSkills[selected.x]);
 				}
 				else{
 					drawToolTipSkill(c, character.allSkills[selected.x-4]);
 				}
-			//	c.drawText(character.currentSkills[selected.x].name, 0, 0, null);
-			//	System.out.println("Skill ="+character.allSkills[selected.x].name);
+				//	c.drawText(character.currentSkills[selected.x].name, 0, 0, null);
+				//	System.out.println("Skill ="+character.allSkills[selected.x].name);
 				//character.equipped[slot.x] = null;
 			}
 			else{
-			//	System.out.println("Skill ="+character.allSkills[selected.x].name);
+				//	System.out.println("Skill ="+character.allSkills[selected.x].name);
 				drawToolTip(c, character.inventory[selected.y][selected.x]);
 			}
 		}
@@ -366,7 +366,7 @@ public class Menu {
 		}
 
 
-		
+
 	}
 
 
@@ -384,13 +384,13 @@ public class Menu {
 		if(character.equipped[3] != null){
 			c.drawBitmap(character.equipped[3].getIcon(),  ringSlot.x, ringSlot.y  , null);
 		}
-		
+
 		Paint pt = new Paint();
 		pt.setAntiAlias(true);
 		pt.setTextSize(22);
 		pt.setColor(Color.WHITE);
 		c.drawText(character.gold+"g", 480-50, 225, pt);
-		
+
 	}
 
 	public void system(Canvas c, float mX, float mY, float uX, float uY, boolean hold) {
@@ -405,8 +405,8 @@ public class Menu {
 		this.hold = hold;
 		drawItems(c);
 		drawEquip(c);
-	
-drawStats(c);
+
+		drawStats(c);
 		slot = getInput(x,y);
 
 		if(!pickUp){
@@ -424,7 +424,7 @@ drawStats(c);
 
 				case 2:
 					c.drawBitmap(iconItem, chestSlot.x, chestSlot.y , null);
-				//	c.drawBitmap(icon2, 95 + (0*218), 23 + 1*icon2.getHeight() , null);
+					//	c.drawBitmap(icon2, 95 + (0*218), 23 + 1*icon2.getHeight() , null);
 					break;
 
 				case 3:
@@ -446,7 +446,7 @@ drawStats(c);
 
 		Item temp;
 		if(!hold){
-			
+
 			slot = getInput(uX,uY);
 			if( getInput(uX,uY) != null && pickUp && valid(slot, dragNum)){
 
@@ -563,46 +563,46 @@ drawStats(c);
 
 	private void drawStats(Canvas c) {
 
-		
+
 		Paint pb = new Paint();
 		pb.setColor(Color.RED);
-		
-	//	c.drawRect(116 , 34, ((259) - (116))*(character.health/character.totalHealth)+116,43, pb); 
+
+		//	c.drawRect(116 , 34, ((259) - (116))*(character.health/character.totalHealth)+116,43, pb); 
 		c.drawRect(97 , 10, ((262) - (97))*(character.health/character.totalHealth)+97,31, pb); 
 
 		pb.setColor(Color.BLUE);
 		c.drawRect(97 , 35, ((262) - (97))*(character.mana/character.totalMana)+97,54, pb); 
-		
-			Paint pt = new Paint();
-			pt.setAntiAlias(true);
-			pt.setColor(Color.WHITE);
-			pt.setTextSize(25);
-			c.drawText(""+character.level, 40, 34, pt);
-			
-			
-			pt.setTextSize(13);
-			c.drawText((int)character.xp+"/"+(int)character.totalXp, 37, 52, pt);
-			
-			c.drawText((int)character.health+"/"+(int)character.totalHealth, 158, 27, pt);
-			c.drawText((int)character.mana+"/"+(int)character.totalMana, 158, 51, pt);
-			
-			
-			pt.setTextSize(17);
 
-			c.drawText("Attack", 26, 90, pt);
-			c.drawText("Defence", 26, 90+43, pt);
-			c.drawText("Stamina", 26, 90+43+43, pt);
-			c.drawText("Intellect", 26, 90+43+43+43, pt);
-			
-			c.drawText(""+character.attack, 125, 90, pt);
-			c.drawText(""+character.defence, 125, 90+43, pt);
-			c.drawText(""+character.stamina, 125, 90+43+43, pt);
-			c.drawText(""+character.intellect, 125, 90+43+43+43, pt);
-			
-			
+		Paint pt = new Paint();
+		pt.setAntiAlias(true);
+		pt.setColor(Color.WHITE);
+		pt.setTextSize(25);
+		c.drawText(""+character.level, 40, 34, pt);
 
 
-		
+		pt.setTextSize(13);
+		c.drawText((int)character.xp+"/"+(int)character.totalXp, 37, 52, pt);
+
+		c.drawText((int)character.health+"/"+(int)character.totalHealth, 158, 27, pt);
+		c.drawText((int)character.mana+"/"+(int)character.totalMana, 158, 51, pt);
+
+
+		pt.setTextSize(17);
+
+		c.drawText("Attack", 26, 90, pt);
+		c.drawText("Defence", 26, 90+43, pt);
+		c.drawText("Stamina", 26, 90+43+43, pt);
+		c.drawText("Intellect", 26, 90+43+43+43, pt);
+
+		c.drawText(""+character.attack, 125, 90, pt);
+		c.drawText(""+character.defence, 125, 90+43, pt);
+		c.drawText(""+character.stamina, 125, 90+43+43, pt);
+		c.drawText(""+character.intellect, 125, 90+43+43+43, pt);
+
+
+
+
+
 	}
 
 	private boolean valid(Point slot, Item drop) {
@@ -622,9 +622,9 @@ drawStats(c);
 
 			case 3:
 				return(drop.type == ItemType.RING);
-		case 4:
-			return(drop.type == ItemType.LEG);
-		}
+			case 4:
+				return(drop.type == ItemType.LEG);
+			}
 		}
 		return false;
 	}
@@ -683,7 +683,7 @@ drawStats(c);
 			return null;
 		}
 	}
-	
+
 	private Point getInputSkill(float x, float y){
 		Point slot = new Point();
 		slot.x = (int)(x-23)/(iconItem.getWidth());
@@ -805,24 +805,24 @@ case 3:
 
 
 	}
-	
-	
-	
+
+
+
 	private int getSlotSkills(float x, float y) {
 		int topIconY = 50;
 		int botIconY = 130;
-		
-	
-		
+
+
+
 		int width = character.currentSkills[0].width;
 		int height = character.currentSkills[0].height;
-		
+
 		if (y> topIconY && y < topIconY+height){
 			//System.out.println("Your presssssed top "+(int)(x-70)/(width));
-			
-			
+
+
 			if((int)(x-70)/(width)< 4){
-			return (int)(x-70)/(width);
+				return (int)(x-70)/(width);
 			}
 			else{
 				return 3;
@@ -859,7 +859,7 @@ case 3:
 			pt.setColor(Color.GREEN);
 			int j = 0;
 			for (Entry<Stat, Integer> entry : i.stats.entrySet()) {
-				
+
 				c.drawText(i.statLexeme(entry.getKey()), 38 , 308+ 18*j, pt);
 				j++;
 				//c.drawText(i.stats, 50, 262, pt);
@@ -868,7 +868,7 @@ case 3:
 
 		}
 	}
-	
+
 	private void drawToolTipSkill(Canvas c, AttackType x){
 		if(!x.empty){
 			Paint pt = new Paint();
@@ -889,22 +889,22 @@ case 3:
 			int rX = 380;
 			int rY = 274;
 			int size = 20;
-		
-			
+
+
 			pt.setColor(Color.BLUE);
 			//c.drawRect(rX+1*size, rY+-1*size, rX+1*size+18, rY+-1*size+18, pt);
 			c.drawCircle (rX+1*size+9, rY+-1*size+9, 10, pt);
 			for(int j = x.attackGrid.length-1; j >= 0; j--){
-			for(int i = 0; i < x.attackGrid[0].length; i++){
-				if(x.attackGrid[j][i]==1){
-					pt.setColor(Color.DKGRAY);
-				c.drawRect(rX+i*size, rY+j*size, rX+i*size+18, rY+j*size+18, pt);
+				for(int i = 0; i < x.attackGrid[0].length; i++){
+					if(x.attackGrid[j][i]==1){
+						pt.setColor(Color.DKGRAY);
+						c.drawRect(rX+i*size, rY+j*size, rX+i*size+18, rY+j*size+18, pt);
+					}
+					else{
+						pt.setColor(Color.WHITE);
+						//	c.drawRect(rX+i*size, rY+j*size, rX+i*size+18, rY+j*size+18, pt);
+					}
 				}
-				else{
-					pt.setColor(Color.WHITE);
-				//	c.drawRect(rX+i*size, rY+j*size, rX+i*size+18, rY+j*size+18, pt);
-				}
-			}
 			}
 			//	
 

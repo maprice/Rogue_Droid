@@ -26,8 +26,8 @@ public class Enemy {
 	int xPlayer, yPlayer; //players x and y coordinates
 	int id;
 
-	
-	
+
+
 	//Prolly should import this from somewhere...
 	final int xSpeed = 6;
 	final int ySpeed = 3;
@@ -47,11 +47,11 @@ public class Enemy {
 
 	AttackSwipe sq;
 
-	
+
 	float totalHP = 100;
 	float currentHP = 100;
 	int damage = 5;
-	
+
 	boolean hit = false;
 
 	public enum direction {
@@ -106,44 +106,44 @@ public class Enemy {
 
 	public void calc() {
 		if(currentHP > 0){
-		hit = false;
-		xPlayer = maper.getCurrentX();
-		yPlayer = maper.getCurrentY();
-		if(yCoord > yPlayer && (maper.validMove(direction.UP.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(direction.UP.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
+			hit = false;
+			xPlayer = maper.getCurrentX();
+			yPlayer = maper.getCurrentY();
+			if(yCoord > yPlayer && (maper.validMove(direction.UP.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(direction.UP.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
 				//System.out.println("Word son, ima go UP");
-			d = direction.UP;
-		}
-		else if(yCoord < yPlayer&& (maper.validMove(direction.DOWN.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(direction.DOWN.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
-			d = direction.DOWN;
-			//	System.out.println("Nigga i sure wanna move DOWN");
-		}
-		else if(xCoord > xPlayer){
-			//	System.out.println("AYYYY Yo i wanna go RIGHT");
-			d = direction.RIGHT;
-		} 
-		else if(xCoord < xPlayer){ 
-			//System.out.println("Yo bitch please i wanna go LEFT");
-			d = direction.LEFT;
-		}
+				d = direction.UP;
+			}
+			else if(yCoord < yPlayer&& (maper.validMove(direction.DOWN.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(direction.DOWN.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
+				d = direction.DOWN;
+				//	System.out.println("Nigga i sure wanna move DOWN");
+			}
+			else if(xCoord > xPlayer){
+				//	System.out.println("AYYYY Yo i wanna go RIGHT");
+				d = direction.RIGHT;
+			} 
+			else if(xCoord < xPlayer){ 
+				//System.out.println("Yo bitch please i wanna go LEFT");
+				d = direction.LEFT;
+			}
 
-		if(abs(yCoord - yPlayer)==1 && xCoord == xPlayer || abs(xCoord - xPlayer)==1 && yCoord == yPlayer){
-			System.out.println("Slime:" + id +" is attacking");
-			attack = true;
-			maper.character.health -= damage; 
-			maper.log.add("Slime "+ id + "[0] hits your for [1]"+damage+"[2] damage[3]", 1);
-			sq.reset();
-			movement = false;
-		}
+			if(abs(yCoord - yPlayer)==1 && xCoord == xPlayer || abs(xCoord - xPlayer)==1 && yCoord == yPlayer){
+				System.out.println("Slime:" + id +" is attacking");
+				attack = true;
+				maper.character.health -= damage; 
+				maper.log.add("Slime "+ id + "[0] hits your for [1]"+damage+"[2] damage[3]", 1);
+				sq.reset();
+				movement = false;
+			}
 
-		else if(!(maper.validMove(d.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(d.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
-			movement = false;
-			System.out.println("SHEEEET i can go thurr");
-		}
-		else{
-			movement = true;
-			setCoord();	
-		}
-	}	
+			else if(!(maper.validMove(d.value,xCoord, yCoord) == BlockType.FLOOR||maper.validMove(d.value,xCoord, yCoord) == BlockType.CORRIDOOR)){
+				movement = false;
+				System.out.println("SHEEEET i can go thurr");
+			}
+			else{
+				movement = true;
+				setCoord();	
+			}
+		}	
 		else{
 			attack = false;
 			movement = false;
@@ -162,7 +162,7 @@ public class Enemy {
 	public void animate(Canvas c, button pressed, int frames) {
 		if(frames%4 == 1){
 
-		update(); //updates the direction being faced.
+			update(); //updates the direction being faced.
 		}
 		//compensates for the movement of the map
 		switch(pressed){
@@ -285,19 +285,19 @@ public class Enemy {
 
 	public void drawHealth(Canvas c) {
 		Paint pc = new Paint();
-	//	float totalHP = 100;
-	//	float currentHP = 75;
-		  pc.setColor(Color.RED);
+		//	float totalHP = 100;
+		//	float currentHP = 75;
+		pc.setColor(Color.RED);
 		c.drawRect(x-15 , y-20, x+35, y-10, pc); 
-		  pc.setColor(Color.GREEN);
-		  if(currentHP < 0){
-			  currentHP = 0; 
-		  }
+		pc.setColor(Color.GREEN);
+		if(currentHP < 0){
+			currentHP = 0; 
+		}
 		c.drawRect(x-15 , y-20, ((x+35) - (x-15))*(currentHP/totalHP)+x-15, y-10, pc); 
-	//	c.drawRect(1)
+		//	c.drawRect(1)
 		//c.drawBitmap(m, src, dst, null);
 		//currentFrame = ++currentFrame % 3;
-		
+
 	}
 
 

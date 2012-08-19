@@ -46,12 +46,12 @@ public class AttackSquare {
 
 		x = 346 + tileWidth/2*((j) - (i));
 		y = 210 + tileHeight/2*((j) + (i));
-		
+
 		Paint p = new Paint();
 		p.setAlpha(70);
 		Rect src = new Rect (srcX ,srcY, srcX + width, srcY + height);
 		Rect dst = new Rect (x, y, x + width, y + height);
-		
+
 		c.drawBitmap(k, src, dst, p);
 
 	}

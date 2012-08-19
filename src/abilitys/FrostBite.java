@@ -35,7 +35,7 @@ public class FrostBite extends AttackType{
 
 		xCenter = 10;
 		yCenter = -55;
-		
+
 		name = "Frost Bite";
 	}
 

@@ -19,18 +19,18 @@ public class AttackType {
 
 	public float damage;
 	public float mana = 10;
-	
+
 	public int[][] attackGrid;
 	char slot;
 	Bitmap effect;
 	Bitmap icon;
 	public String name;
 	public String description = "<Insert Description>";
-	
+
 	public Boolean empty = false;
-	
+
 	int frames;
-	
+
 	OurView ov;
 	int x, y;
 	public int height, width;
@@ -152,10 +152,10 @@ public class AttackType {
 	}
 
 
-public Bitmap getIcon(){
-	return icon;
-	
-}
+	public Bitmap getIcon(){
+		return icon;
+
+	}
 
 	public void animate(Canvas c) {
 		currentFrame++;

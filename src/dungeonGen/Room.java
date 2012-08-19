@@ -5,11 +5,6 @@ import java.util.List;
 
 import dungeonGen.Dungeon.Direction;
 
-
-
-
-
-
 public class Room {
 	int id;
 	public int x, y;

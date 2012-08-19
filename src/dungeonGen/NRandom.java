@@ -15,7 +15,7 @@ public class NRandom extends Random{
 		newSeed = System.currentTimeMillis();
 		this.setSeed(newSeed);
 	}
-	
+
 	public NRandom(long newSeed){
 		this.newSeed = newSeed;
 		this.setSeed(newSeed);

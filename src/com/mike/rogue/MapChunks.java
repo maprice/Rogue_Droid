@@ -188,7 +188,7 @@ public class MapChunks{
 				break;
 			} 
 		}
-	c.drawBitmap(floorChunk, x-(pixelBufferX/4 - 40 ), y-(pixelBufferY/4+40), null);
+		c.drawBitmap(floorChunk, x-(pixelBufferX/4 - 40 ), y-(pixelBufferY/4+40), null);
 	}
 
 	public void drawWalls(Canvas c){
@@ -229,21 +229,21 @@ public class MapChunks{
 					case BOTTOMCORNER:
 						nextBlock = BCF;
 						break; 
-				case UDDOOR:
+					case UDDOOR:
 						nextBlock = SEDF;
 						break; 
 					case LRDOOR:
 						nextBlock = SWDF;
 						break;	
-						
-				/*		
+
+						/*		
 					case UDDOOR:
 						nextBlock = NU;
 						break;	
 					case LRDOOR:
 						nextBlock = NU;
 						break;	
-					*/	
+						 */	
 					default:
 						nextBlock = NU;
 					}
@@ -264,15 +264,15 @@ public class MapChunks{
 		}
 		return x;
 	}
- 
+
 
 
 
 
 	public void center( BlockType[][] visibility, int xCoord, int yCoord, boolean door) {
 		if(abs(xCoord-centerX) > 5 || abs(yCoord-centerY) > 5 || door){
-			
-			
+
+
 			x = 0;
 			y = 0;
 			centerX = xCoord;
@@ -285,10 +285,10 @@ public class MapChunks{
 			wallChunk = saveWalls(visibility, xCoord, yCoord);
 			System.gc();
 		}
-	//	if(door){
-	//		g = visibility;
-//
-		
-	//	}
+		//	if(door){
+		//		g = visibility;
+		//
+
+		//	}
 	}
 }

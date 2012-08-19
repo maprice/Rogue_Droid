@@ -41,36 +41,36 @@ public class Main extends Activity implements OnTouchListener {
 	Bitmap skillMenuA, skillMenuB, skillMenuC, skillMenuD, skillToolTip, floorBar, miniMap, miniMapHidden, logHidden;
 	float x , y;
 	float uX, uY;
- 
+
 	int screenHeight;
 	int screenWidth;
 	boolean hold = false;
 	boolean init = false;
 	boolean showMap = true;
 	boolean showLog = true;
- Map map;
+	Map map;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); //Locks orientation to landscape
-		
 
-	        v = new OurView(this);//();
-	        v.setOnTouchListener(this);
-	     //   v.setOrientation
-	   
+
+		v = new OurView(this);//();
+		v.setOnTouchListener(this);
+		//   v.setOrientation
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //hides the title
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); //hides the status bar
 
 		//v = new OurView(this);
-		
-
-		
 
 
-	
+
+
+
+
 
 		setContentView(v);
 
@@ -80,31 +80,31 @@ public class Main extends Activity implements OnTouchListener {
 
 		System.out.println(screenWidth);
 		System.out.println(screenHeight);
-		
-		  final Object xyz = getLastNonConfigurationInstance();
-		    
-		    // The activity is starting for the first time, load the photos from Flickr
-		    if (xyz == null) {
-		        map	= new Map(v, getResources(), 1);	
-		    } else {
-		        // The activity was destroyed/created automatically, populate the grid
-		        // of photos with the images loaded by the previous activity
-		     this.map = (Map)xyz;
-		    }
+
+		final Object xyz = getLastNonConfigurationInstance();
+
+		// The activity is starting for the first time, load the photos from Flickr
+		if (xyz == null) {
+			map	= new Map(v, getResources(), 1);	
+		} else {
+			// The activity was destroyed/created automatically, populate the grid
+			// of photos with the images loaded by the previous activity
+			this.map = (Map)xyz;
+		}
 
 	}
 
 	@Override
 	public void onBackPressed() {
-	// do something on back.
+		// do something on back.
 		super.onBackPressed();
 		System.out.println("Back button pressed");
-		 this.finish();
-		 System.exit(0);
+		this.finish();
+		System.exit(0);
 		// this.onDestroy();
-	return;
+		return;
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -118,14 +118,14 @@ public class Main extends Activity implements OnTouchListener {
 	}
 
 
-	
+
 	@Override
 	public Object onRetainNonConfigurationInstance() {
-	    final Map[] list = new Map[1];
-	list[0] = map;
-	    return map;
+		final Map[] list = new Map[1];
+		list[0] = map;
+		return map;
 	}
-	
+
 
 
 	@Override
@@ -134,7 +134,7 @@ public class Main extends Activity implements OnTouchListener {
 		case MotionEvent.ACTION_DOWN:
 			x = me.getX();
 			y = me.getY();
-		break;
+			break;
 		case MotionEvent.ACTION_MOVE:
 			x = me.getX();
 			y = me.getY();
@@ -149,24 +149,24 @@ public class Main extends Activity implements OnTouchListener {
 		}
 		return true;
 	}
-	
+
 
 	public int getScreenOrientation()
 	{
-	    Display getOrient = getWindowManager().getDefaultDisplay();
-	    int orientation = Configuration.ORIENTATION_UNDEFINED;
-	    if(getOrient.getWidth()==getOrient.getHeight()){
-	        orientation = Configuration.ORIENTATION_SQUARE;
-	    } else{ 
-	        if(getOrient.getWidth() < getOrient.getHeight()){
-	            orientation = Configuration.ORIENTATION_PORTRAIT;
-	        }else { 
-	             orientation = Configuration.ORIENTATION_LANDSCAPE;
-	        }
-	    }
-	    return orientation;
+		Display getOrient = getWindowManager().getDefaultDisplay();
+		int orientation = Configuration.ORIENTATION_UNDEFINED;
+		if(getOrient.getWidth()==getOrient.getHeight()){
+			orientation = Configuration.ORIENTATION_SQUARE;
+		} else{ 
+			if(getOrient.getWidth() < getOrient.getHeight()){
+				orientation = Configuration.ORIENTATION_PORTRAIT;
+			}else { 
+				orientation = Configuration.ORIENTATION_LANDSCAPE;
+			}
+		}
+		return orientation;
 	}
-	
+
 	public enum button {
 		UP (0), DOWN (1) , LEFT (2), RIGHT (3), NONE (4) , A (5),B (6),C (7),D (8) , S(9), MAP(10), LOG(11);  
 		int value;
@@ -174,20 +174,20 @@ public class Main extends Activity implements OnTouchListener {
 			value = v;
 		}
 	}
-	
+
 
 	int FRAMES_PER_SECOND;
 	int SKIP_TICKS;
 
 	long next_game_tick;
-	
+
 	public class OurView extends SurfaceView implements Runnable{
 		int setOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 		Thread t = null;
 		SurfaceHolder holder;
 		boolean ok = false;
 
-	//	Map map ;
+		//	Map map ;
 		Menu inventory; 
 		button pressed = button.NONE;
 		button lastDirection = button.NONE;
@@ -199,26 +199,26 @@ public class Main extends Activity implements OnTouchListener {
 
 
 
-		
 
 
 
-boolean loaded = false;
+
+		boolean loaded = false;
 		boolean	menu = false;
-	
+
 		public void run() {
 			Canvas c = null;
 
-		//	if(!init){
+			//	if(!init){
 			//	System.out.println("WTF");
-			
-			 inventory = new Menu(OurView.this, getResources(), map.character);
-		//	 init = true;
-		//	}
+
+			inventory = new Menu(OurView.this, getResources(), map.character);
+			//	 init = true;
+			//	}
 			//map.spawn(3);
 
 
-			
+
 			FRAMES_PER_SECOND = 25;
 			SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 
@@ -236,38 +236,38 @@ boolean loaded = false;
 				changeSkills(button.NONE, 0);
 			}
 
-			
+
 			while(ok == true){
-			//	System.out.println(getScreenOrientation2());
+				//	System.out.println(getScreenOrientation2());
 				if(!holder.getSurface().isValid()){
 					continue;	
 				}
 				//if(true){
-		
+
 				if(  getScreenOrientation() == Configuration.ORIENTATION_PORTRAIT){
-					
-					
-					
-					
+
+
+
+
 					if(loaded){
 						System.out.println("LoadedBit");
-					recycleBitmaps();
-					inventory.loadBitmaps();
-					loaded = false;
+						recycleBitmaps();
+						inventory.loadBitmaps();
+						loaded = false;
 					} 
-				//	inventory.loadBitmaps();
+					//	inventory.loadBitmaps();
 					c = holder.lockCanvas();
 					inventory.display(c, x , y, uX, uY, hold);
 					holder.unlockCanvasAndPost(c);
-					
-					
-					
-					 if ( idleClock == 10){
-						 c = holder.lockCanvas();
-		
-						 inventory.animate(c);	
-							
-							holder.unlockCanvasAndPost(c);
+
+
+
+					if ( idleClock == 10){
+						c = holder.lockCanvas();
+
+						inventory.animate(c);	
+
+						holder.unlockCanvasAndPost(c);
 						//	System.out.println("IDLEING");
 						//System.out.println("Idling");
 						idleClock = 0;
@@ -289,15 +289,15 @@ boolean loaded = false;
 
 						//idleClock++;
 					}
-					
+
 				}
 				else if(!loaded){
 					inventory.recycleBitmaps();
 					loadBitmaps();
-					
-					
+
+
 				}
-				
+
 				else if(menu){
 					//displayMenu(c);
 					c = holder.lockCanvas();
@@ -352,9 +352,9 @@ boolean loaded = false;
 
 
 
-public void resetTimer(){
-	next_game_tick = SystemClock.uptimeMillis();
-}
+		public void resetTimer(){
+			next_game_tick = SystemClock.uptimeMillis();
+		}
 
 
 
@@ -424,32 +424,32 @@ public void resetTimer(){
 
 				break;	
 			case MAP: 
-			 if(showMap){
-				 showMap = false;
-			 }
-			 else{
-				 showMap = true;
-			 }
-drawIdle(c);
+				if(showMap){
+					showMap = false;
+				}
+				else{
+					showMap = true;
+				}
+				drawIdle(c);
 				break;	
 			case LOG: 
-				 if(showLog){
-						map.log.add("Combat Log Hidden[0]", 8);
-					 showLog = false;
-				 }
-				 else{
-					 map.log.add("Combat Log Shown[0]", 8);
-					 showLog = true;
-				 }
-	drawIdle(c);
-					break;	
+				if(showLog){
+					map.log.add("Combat Log Hidden[0]", 8);
+					showLog = false;
+				}
+				else{
+					map.log.add("Combat Log Shown[0]", 8);
+					showLog = true;
+				}
+				drawIdle(c);
+				break;	
 			}
 		}
 
 
 
 		private void loot(Canvas c) {
-			
+
 			for (int i =0; i < map.loots.size(); i++){
 
 				if(map.loots.get(i).xCoord == map.currentX && map.loots.get(i).yCoord == map.currentY && map.loots.get(i).type){
@@ -469,10 +469,10 @@ drawIdle(c);
 					updateButton(c);
 					drawIdle(c);
 					return;
-					
+
 				}
 			}
-		
+
 		}
 
 
@@ -516,7 +516,7 @@ drawIdle(c);
 				if(pressed == button.S){
 					if(map.attackType.mana > map.character.mana){
 						map.log.add("You dont have enough[0] MP[1] to cast that[2]", 6);
-						
+
 						return;
 					}
 					map.character.mana = map.character.mana - map.attackType.mana;
@@ -542,10 +542,10 @@ drawIdle(c);
 					buttonS.recycle();
 					buttonS = BitmapFactory.decodeResource(getResources(), R.drawable.ui_buttona);
 					map.calcHit();
-					
+
 					for (int i =0; i < map.enemies.size(); i++){
 						if(map.enemies.get(i).hit){
-							 map.log.add("Your [0]"+  map.attackType.name +"[1] hits [2]Slime "+  map.enemies.get(i).id + "[3] for [4]" + (int) (map.attackType.damage +map.character.attack) +"[5]", 0);
+							map.log.add("Your [0]"+  map.attackType.name +"[1] hits [2]Slime "+  map.enemies.get(i).id + "[3] for [4]" + (int) (map.attackType.damage +map.character.attack) +"[5]", 0);
 						}
 					}
 					//woo
@@ -626,9 +626,9 @@ drawIdle(c);
 					idleClock++;
 				}
 			}
-			
-	
-			
+
+
+
 		} 
 
 
@@ -640,7 +640,7 @@ drawIdle(c);
 			p.setAlpha(80);
 			c.drawBitmap(joyPad, 10, 260, p);
 			c.drawBitmap(buttonS, screenWidth-buttonS.getWidth(), screenHeight-buttonS.getHeight(), p);
-		//	c.drawBitmap(buttonS, screenWidth-buttonS.getWidth(), screenHeight-buttonS.getHeight(), p);
+			//	c.drawBitmap(buttonS, screenWidth-buttonS.getWidth(), screenHeight-buttonS.getHeight(), p);
 
 			Paint pc = new Paint();
 
@@ -650,7 +650,7 @@ drawIdle(c);
 			pc.setStyle(Paint.Style.STROKE); 
 			pc.setStrokeWidth(7);
 
-			
+
 			RectF rectF = new RectF(26, 24+9, 25+73, 25+9+73);
 			c.drawOval(rectF, pc);
 			pc.setColor(Color.BLACK);
@@ -659,18 +659,18 @@ drawIdle(c);
 
 			p.setAlpha(250);
 			c.drawBitmap(statusBar, 10, 5, p);
-		//	c.drawBitmap(floorBar, (screenWidth/2)-(floorBar.getWidth()/2), screenHeight-floorBar.getHeight(), p);
-			
+			//	c.drawBitmap(floorBar, (screenWidth/2)-(floorBar.getWidth()/2), screenHeight-floorBar.getHeight(), p);
+
 			p.setAlpha(170);
 			c.drawBitmap(buttonD, screenWidth-211, screenHeight-buttonA.getHeight()-2, p);
 			c.drawBitmap(buttonA, screenWidth-buttonB.getWidth()-2, screenHeight-211, p);
 			c.drawBitmap(buttonB, screenWidth-buttonC.getWidth()-71, screenHeight-buttonC.getHeight()-122, p);
 			c.drawBitmap(buttonC, screenWidth-buttonD.getWidth()-122, screenHeight-buttonD.getHeight()-71, p);
 
-			
+
 			//	float totalHP = 100;
 			//	float currentHP = 75;
-			
+
 			Paint pb = new Paint();
 			pb.setColor(Color.BLACK);
 			c.drawRect(116 , 34, 259, 43, pb); 
@@ -694,14 +694,14 @@ drawIdle(c);
 			pt.setColor(Color.WHITE);
 			c.drawText(Integer.toString(map.character.level), 55, 80, pt);
 
-			
+
 			pt.setTextSize(20);
-			
-			
+
+
 			//  pc.setColor(Color.YELLOW);
 			p.setAlpha(70);
 			if(showLog){
-			drawCombatLog(c);
+				drawCombatLog(c);
 			}
 			else{
 				c.drawBitmap(logHidden, (screenWidth-logHidden.getWidth())/2, screenHeight-logHidden.getHeight(), p);
@@ -710,7 +710,7 @@ drawIdle(c);
 			//c.drawArc (rectF, 90, -270, false, pc);
 			//c.drawArc(rectF, startAngle, sweepAngle, useCenter, paint)
 			if(showMap){
-			drawMiniMap(c);
+				drawMiniMap(c);
 			}
 			else{
 				c.drawBitmap(miniMapHidden, screenWidth-miniMap.getWidth(), 0, p);
@@ -722,30 +722,30 @@ drawIdle(c);
 
 
 
-	
-	
+
+
 		// String a = "hey";
-		
+
 
 		private void drawCombatLog(Canvas c) {
-			
-		//	map.log.add("thing 1");
-		//	map.log.add("thing 2");
-		//	map.log.add("thing 3");
-		//	map.log.add("thing 4");
-			
+
+			//	map.log.add("thing 1");
+			//	map.log.add("thing 2");
+			//	map.log.add("thing 3");
+			//	map.log.add("thing 4");
+
 			Paint pb = new Paint();
 			pb.setColor(Color.BLACK);
 			pb.setAlpha(100);
-		//	c.drawRect(220 , screenHeight-92 - map.log.size()*20, screenWidth - 220, screenHeight, pb); 
+			//	c.drawRect(220 , screenHeight-92 - map.log.size()*20, screenWidth - 220, screenHeight, pb); 
 			c.drawRect(220 , screenHeight - map.log.size()*23, screenWidth - 220, screenHeight, pb); 
 			Paint pt = new Paint();
 			pt.setAntiAlias(true);
 			pt.setTextSize(16);
 			pt.setColor(Color.WHITE);
-			
-			
-			 
+
+
+
 			//  c.drawString(s, rightEdge - fm.stringWidth(s), y);
 			int colors[] = new int[6];
 			for(int i = 0; i < map.log.size(); i++){
@@ -755,14 +755,14 @@ drawIdle(c);
 				//3 = gold loots
 				String output = map.log.get(i);
 
-				
-			
-			//	System.out.println(output);
-			//	System.out.println(map.log.getType(i));
+
+
+				//	System.out.println(output);
+				//	System.out.println(map.log.getType(i));
 				switch(map.log.getType(i)){
-				
+
 				case 0: 
-					
+
 					// map.log.add("Your [0]"+  map.attackType.name +"[1] hits [2]Slime "+  map.enemies.get(i).id + "[3] for [4]" + (int) map.attackType.damage +"[5]", 0);
 					colors[0] = Color.WHITE;
 					colors[1] = Color.GREEN;
@@ -770,76 +770,76 @@ drawIdle(c);
 					colors[3] = Color.RED;
 					colors[4] = Color.WHITE;
 					colors[5] = Color.YELLOW;
-				
+
 					outputString(c, pt, output, colors, i);
-				break;
+					break;
 				case 1: 
 					colors[0] = Color.RED;
 					colors[1] = Color.WHITE;
 					colors[2] = Color.YELLOW;
 					colors[3] = Color.WHITE;
-				
+
 					outputString(c, pt, output, colors, i);
-				break;
-				
+					break;
+
 				case 2:
 					colors[0] = Color.RED;
 					colors[1] = Color.WHITE;
 					colors[2] =  Color.rgb(165,56,198);
-				//	colors[3] = Color.WHITE;
+					//	colors[3] = Color.WHITE;
 					//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
 					outputString(c, pt, output, colors, i);
 					break;
-				
+
 				case 3:
 					colors[0] = Color.WHITE;
 					colors[1] = Color.YELLOW;
-				//	colors[2] =  Color.rgb(165,56,198);
-				//	colors[3] = Color.WHITE;
+					//	colors[2] =  Color.rgb(165,56,198);
+					//	colors[3] = Color.WHITE;
 					//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
 					outputString(c, pt, output, colors, i);
 					break;
-					
+
 				case 4:
 					colors[0] = Color.WHITE;
 					colors[1] = Color.YELLOW;
 					colors[2] = Color.WHITE;
-				//	colors[3] = Color.WHITE;
+					//	colors[3] = Color.WHITE;
 					//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
 					outputString(c, pt, output, colors, i);
 					break;
-					
-					 
-				 case 5:
+
+
+				case 5:
 					pt.setColor(Color.WHITE);
 					c.drawText(map.log.get(i), 225, screenHeight+ 10 +20*i - 20*map.log.size(), pt);
 					break;
-					
-				 case 6:
-						colors[0] = Color.WHITE;
-						colors[1] = Color.BLUE;
-						colors[2] = Color.WHITE;
-						//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
-						outputString(c, pt, output, colors, i);
-						break;
-				 case 8:
-						colors[0] = Color.GRAY;
-						//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
-						outputString(c, pt, output, colors, i);
-						break;
-					default:
-						
+
+				case 6:
+					colors[0] = Color.WHITE;
+					colors[1] = Color.BLUE;
+					colors[2] = Color.WHITE;
+					//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
+					outputString(c, pt, output, colors, i);
+					break;
+				case 8:
+					colors[0] = Color.GRAY;
+					//log.add("Slime "+enemies.get(i).id+" dies, you gain 25xp", 2);
+					outputString(c, pt, output, colors, i);
+					break;
+				default:
+
 					//	System.out.println
-						
-						pt.setColor(Color.WHITE);
-						pt.getFontSpacing();
-						c.drawText(output.substring(0, output.indexOf(':')), 225, screenHeight+ 10 +20*i - 20*map.log.size(), pt);
-						pt.setColor(map.log.getType(i));
-						c.drawText(output.substring(output.indexOf(':')+1, output.length()), 225 +pt.measureText(output.substring(0, output.indexOf(':'))) , screenHeight+ 10 +20*i - 20*map.log.size(), pt);						 
+
+					pt.setColor(Color.WHITE);
+					pt.getFontSpacing();
+					c.drawText(output.substring(0, output.indexOf(':')), 225, screenHeight+ 10 +20*i - 20*map.log.size(), pt);
+					pt.setColor(map.log.getType(i));
+					c.drawText(output.substring(output.indexOf(':')+1, output.length()), 225 +pt.measureText(output.substring(0, output.indexOf(':'))) , screenHeight+ 10 +20*i - 20*map.log.size(), pt);						 
 				}
-				
-		
-		}
+
+
+			}
 		}
 
 
@@ -852,11 +852,11 @@ drawIdle(c);
 			String s = output;
 
 			for(int i = 0; output.indexOf("["+i+"]") != -1; i++){
-			//	System.out.println(output.indexOf("["+i+"]"));
-			//	System.out.println("OH HAI");
+				//	System.out.println(output.indexOf("["+i+"]"));
+				//	System.out.println("OH HAI");
 				// pt.measureText(output.substring(0, output.indexOf("["+i+"]"))
 				pt.setColor(colors[i]);
-			//	pt.setColor(Color.WHITE);
+				//	pt.setColor(Color.WHITE);
 				c.drawText(s.substring(0, s.indexOf("["+i+"]")), 225+start, screenHeight+ 10 +20*index - 20*map.log.size(), pt);
 				start += pt.measureText(s.substring(0, s.indexOf("["+i+"]")));
 				s = s.substring(s.indexOf("["+i+"]")+3, s.length());
@@ -871,42 +871,42 @@ drawIdle(c);
 
 		private void drawMiniMap(Canvas c) {
 			Paint pm = new Paint();
-			
+
 			pm.setColor(Color.BLACK);
 			pm.setAlpha(255);
-			   c.drawCircle(screenWidth-(miniMap.getWidth()/2)+20, 100, 90, p);
-		
-		
-		
+			c.drawCircle(screenWidth-(miniMap.getWidth()/2)+20, 100, 90, p);
+
+
+
 			pm.setColor(Color.BLACK);
 			pm.setAlpha(160);
 			//c.drawRect(screenWidth-175,0, screenWidth, 175, pm);
-			
+
 			pm.setColor(Color.DKGRAY);
-			
+
 			for(int j =  map.currentX-15; j<  map.currentX+15; j++){
-			for(int i = map.currentY-15; i<  map.currentY+15; i++){
-				if(i >= 0 && j >= 0 && i < map.d.visibility.length &&  j < map.d.visibility.length){
-					if (map.d.visibility[j][i] == BlockType.FLOOR || map.d.visibility[j][i] == BlockType.CORRIDOOR){
-						pm.setColor(Color.DKGRAY);
-					c.drawRect(screenWidth-87 + ((i-map.currentY)*5),100 + ((j-map.currentX)*5), screenWidth - 87 + ((i-map.currentY)*5 + 5), 100 + ((j-map.currentX)*5 + 5), pm);
-					}
-					else if (map.d.visibility[j][i] == BlockType.STAIRDD 
-							|| map.d.visibility[j][i] == BlockType.STAIRDL
-							|| map.d.visibility[j][i] == BlockType.STAIRDR
-							|| map.d.visibility[j][i] == BlockType.STAIRDT
-							|| map.d.visibility[j][i] == BlockType.STAIRUD 
-							|| map.d.visibility[j][i] == BlockType.STAIRUL
-							|| map.d.visibility[j][i] == BlockType.STAIRUR
-							|| map.d.visibility[j][i] == BlockType.STAIRUT){
-						pm.setColor(Color.GREEN);
-						c.drawRect(screenWidth-87 + ((i-map.currentY)*5),100 + ((j-map.currentX)*5), screenWidth - 87 + ((i-map.currentY)*5 + 5), 100 + ((j-map.currentX)*5 + 5), pm);
+				for(int i = map.currentY-15; i<  map.currentY+15; i++){
+					if(i >= 0 && j >= 0 && i < map.d.visibility.length &&  j < map.d.visibility.length){
+						if (map.d.visibility[j][i] == BlockType.FLOOR || map.d.visibility[j][i] == BlockType.CORRIDOOR){
+							pm.setColor(Color.DKGRAY);
+							c.drawRect(screenWidth-87 + ((i-map.currentY)*5),100 + ((j-map.currentX)*5), screenWidth - 87 + ((i-map.currentY)*5 + 5), 100 + ((j-map.currentX)*5 + 5), pm);
 						}
+						else if (map.d.visibility[j][i] == BlockType.STAIRDD 
+								|| map.d.visibility[j][i] == BlockType.STAIRDL
+								|| map.d.visibility[j][i] == BlockType.STAIRDR
+								|| map.d.visibility[j][i] == BlockType.STAIRDT
+								|| map.d.visibility[j][i] == BlockType.STAIRUD 
+								|| map.d.visibility[j][i] == BlockType.STAIRUL
+								|| map.d.visibility[j][i] == BlockType.STAIRUR
+								|| map.d.visibility[j][i] == BlockType.STAIRUT){
+							pm.setColor(Color.GREEN);
+							c.drawRect(screenWidth-87 + ((i-map.currentY)*5),100 + ((j-map.currentX)*5), screenWidth - 87 + ((i-map.currentY)*5 + 5), 100 + ((j-map.currentX)*5 + 5), pm);
+						}
+					}
 				}
+				//c.drawRect(0 , 0, 800, 480, p); 
 			}
-					//c.drawRect(0 , 0, 800, 480, p); 
-		}
-			
+
 			c.drawBitmap(miniMap, screenWidth-miniMap.getWidth(), 0, null);
 			pm.setColor(Color.RED);
 			c.drawRect(screenWidth-(87) ,100 , screenWidth-(87)+5 ,100 +5 , pm);
@@ -995,27 +995,27 @@ drawIdle(c);
 
 			} 
 
-			
+
 			updateButton(c);
 			map.center(map.currentX, map.currentY, false);
 			resetTimer();
 
 		}
 
-		
+
 		private void updateButton(Canvas c){
 			for (int i =0; i < map.loots.size(); i++){
 
 				if(map.loots.get(i).xCoord == map.currentX && map.loots.get(i).yCoord == map.currentY){
 					buttonS.recycle();
 					buttonS = BitmapFactory.decodeResource(getResources(), R.drawable.ui_buttona_loot);
-				drawIdle(c);
+					drawIdle(c);
 					return;
 				}
 			}
 			buttonS.recycle();
 			buttonS = BitmapFactory.decodeResource(getResources(), R.drawable.ui_buttona);
-			
+
 		}
 
 
@@ -1128,10 +1128,10 @@ drawIdle(c);
 					return true;
 				}
 				else if(within(220, screenHeight - 4*23, screenWidth - 220 ,screenHeight, true)){
-					
-				//	c.drawRect(220 , screenHeight - map.log.size()*23, screenWidth - 220, screenHeight, pb); 
+
+					//	c.drawRect(220 , screenHeight - map.log.size()*23, screenWidth - 220, screenHeight, pb); 
 					//c.drawRect(220 , screenHeight - map.log.size()*23, screenWidth - 220, screenHeight, pb); 
-					
+
 					pressed = button.LOG;	 
 					System.out.println("LOG");
 					hold=true;
@@ -1453,25 +1453,25 @@ drawIdle(c);
 			c.drawRect(((259) - (116))*(map.character.mana/map.character.totalMana)+116 - (((259) - (116))*(mana/map.character.totalMana)) , 50, ((259) - (116))*(map.character.mana/map.character.totalMana)+116,59, pc); 
 
 		}
-		
+
 		private void loadBitmaps() {
 			loaded = true;
 			joyPad = BitmapFactory.decodeResource(getResources(), R.drawable.ui_joypad);
 			statusBar = BitmapFactory.decodeResource(getResources(), R.drawable.ui_statusbar);
 			grad = BitmapFactory.decodeResource(getResources(), R.drawable.ui_gradient);
 			buttonS = BitmapFactory.decodeResource(getResources(), R.drawable.ui_buttona);
-		//	floorBar = BitmapFactory.decodeResource(getResources(), R.drawable.ui_floorbar);
+			//	floorBar = BitmapFactory.decodeResource(getResources(), R.drawable.ui_floorbar);
 			miniMap = BitmapFactory.decodeResource(getResources(), R.drawable.ui_minimap);
 			miniMapHidden = BitmapFactory.decodeResource(getResources(), R.drawable.ui_minimap_hidden);
 			logHidden = BitmapFactory.decodeResource(getResources(), R.drawable.ui_log_hidden);
 			map.loadBitmaps();
-			
-			
 
-		//	buttonA = BitmapFactory.decodeResource(getResources(), R.drawable.si_frostbite);
-		//	buttonB = BitmapFactory.decodeResource(getResources(), R.drawable.si_firestorm);
-		//	buttonC = BitmapFactory.decodeResource(getResources(), R.drawable.si_drainlife);
-		//	buttonD = BitmapFactory.decodeResource(getResources(), R.drawable.si_lightning);
+
+
+			//	buttonA = BitmapFactory.decodeResource(getResources(), R.drawable.si_frostbite);
+			//	buttonB = BitmapFactory.decodeResource(getResources(), R.drawable.si_firestorm);
+			//	buttonC = BitmapFactory.decodeResource(getResources(), R.drawable.si_drainlife);
+			//	buttonD = BitmapFactory.decodeResource(getResources(), R.drawable.si_lightning);
 			emptySkill = BitmapFactory.decodeResource(getResources(), R.drawable.si_emptyskill);
 
 
@@ -1479,40 +1479,40 @@ drawIdle(c);
 
 
 
-			
-			
+
+
 		}
-		
+
 		public void recycleBitmaps() {
 			loaded = false;
 			joyPad.recycle();
 			statusBar.recycle();
 			grad.recycle();
 			buttonS.recycle();
-		//	floorBar.recycle();
+			//	floorBar.recycle();
 			miniMap.recycle();
 			miniMapHidden.recycle();
 			logHidden.recycle();
 			map.recycleBitmaps();
-			
 
-		//	buttonA.recycle();
+
+			//	buttonA.recycle();
 			//buttonB.recycle();
-		//buttonC.recycle();
+			//buttonC.recycle();
 			//buttonD.recycle();
 			emptySkill.recycle();
-loaded = false;
+			loaded = false;
 
 
 
 
 
-			
+
 		}
 
 	}
 
-	}
+}
 
 
 

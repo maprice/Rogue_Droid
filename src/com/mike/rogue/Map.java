@@ -45,7 +45,7 @@ final public class Map {
 
 	Bitmap mCBitmap;
 	Bitmap map, walls;
-//	Bitmap HIGH;
+	//	Bitmap HIGH;
 
 	int startRow;
 	int startCol;
@@ -67,10 +67,10 @@ final public class Map {
 	boolean movement = false;
 
 	int dunFloor = 1;
-	
-	
-	
-	
+
+
+
+
 	Dungeon.BlockType[][] tileMap;
 	//AttackSquare square;
 	/*
@@ -117,11 +117,11 @@ final public class Map {
 
 	MapChunks m;
 
-	 public Map(OurView ourView, Resources r,int level) {
+	public Map(OurView ourView, Resources r,int level) {
 		// TODO Auto-generated constructor stub
 		ov = ourView;
 
-	
+
 		mCBitmap = null;//BitmapFactory.decodeResource(r, R.drawable.tile4);
 
 		enemies = new ArrayList<Enemy>();
@@ -137,7 +137,7 @@ final public class Map {
 		System.out.println("CONSTRUCTYEFDDD");
 
 		currentMap = d.grid;
-	//	currentMap = tileMap;
+		//	currentMap = tileMap;
 
 		startRow = d.startY;
 		startCol = d.startX;
@@ -148,7 +148,7 @@ final public class Map {
 		currentX = startRow;
 		currentY = startCol;
 
-	//	System.out.println(startRow+"     "+ startCol);
+		//	System.out.println(startRow+"     "+ startCol);
 		sprite = new Sprite(ov,re);	
 
 
@@ -158,13 +158,13 @@ final public class Map {
 
 		m = new MapChunks(ourView, r, d.visibility, startRow, startCol);
 		log = new CombatLog();
-		
-		
-		 Item newItem = new Item(ourView, r, 4);
+
+
+		Item newItem = new Item(ourView, r, 4);
 		character.addItem(newItem); 
-		
+
 	}
-	
+
 
 
 
@@ -233,9 +233,9 @@ final public class Map {
 				return currentMap[x-1][y];
 			}
 			break;
-	case 4:
+		case 4:
 			return currentMap[x][y];
-	}
+		}
 		return BlockType.NOTHING;
 
 	}
@@ -292,7 +292,7 @@ final public class Map {
 			//setCoord(pressed);	
 
 			//openDoor(getCurrentX(), getCurrentY());
-		//	levelUp();
+			//	levelUp();
 
 		}
 		else if(validMove(pressed.value, getCurrentX(), getCurrentY())== BlockType.STAIRUD
@@ -308,7 +308,7 @@ final public class Map {
 
 			//openDoor(getCurrentX(), getCurrentY());
 
-		//	levelUp();
+			//	levelUp();
 		}
 		else{
 			movement = false;
@@ -365,7 +365,7 @@ final public class Map {
 	public void animateMovement(Canvas c, button pressed, int frames) {
 
 		m.drawMap(c, pressed, movement);
-		
+
 		for (int i =0; i < loots.size(); i++){
 
 			loots.get(i).animate(c, pressed, movement);
@@ -393,13 +393,13 @@ final public class Map {
 	public void drawIdle(Canvas c) {
 
 		m.drawMap(c, button.NONE, false);
-		
+
 		for (int i =0; i < loots.size(); i++){
 
 			loots.get(i).animate(c, button.NONE, false);
 		}
-		
-		
+
+
 		sprite.face(c, button.NONE);
 
 		for (int i =0; i < enemies.size(); i++){
@@ -483,71 +483,71 @@ final public class Map {
 	}
 	public void levelDown(Canvas c) {
 		dunFloor--;
-			enemies.clear();
-			loots.clear();
+		enemies.clear();
+		loots.clear();
 		//	m = null;
-			//	mapSquares = new ArrayList<Bitmap>();
+		//	mapSquares = new ArrayList<Bitmap>();
 
-			//	x = y = 0;
-			//	re = r;
-			
-		
-			if (!pastSeed.isEmpty()){
-				long temp = pastSeed.pop();
-				d = null;
-				d = new Dungeon(temp);
-			}else{
-				long temp = d.rand.getSeed();
-				d = null;
-				d = new Dungeon(temp);
-			}
-			//d.printGrid();
+		//	x = y = 0;
+		//	re = r;
 
-			//System.out.println("CONSTRUCTYEFDDD");
 
-			currentMap = d.grid;;
+		if (!pastSeed.isEmpty()){
+			long temp = pastSeed.pop();
+			d = null;
+			d = new Dungeon(temp);
+		}else{
+			long temp = d.rand.getSeed();
+			d = null;
+			d = new Dungeon(temp);
+		}
+		//d.printGrid();
 
-			startRow = d.endY;
-			startCol = d.endX;
-			currentX = startRow;
-			currentY = startCol;
+		//System.out.println("CONSTRUCTYEFDDD");
+
+		currentMap = d.grid;;
+
+		startRow = d.endY;
+		startCol = d.endX;
+		currentX = startRow;
+		currentY = startCol;
 		//	center(currentX,currentY ,d.visibility) ;
-			// System.out.println(startRow+"     "+ startCol);
-			//		sprite = new Sprite(ov,re);	
+		// System.out.println(startRow+"     "+ startCol);
+		//		sprite = new Sprite(ov,re);	
 
 
-			//	character = new Stats(ov, re);
+		//	character = new Stats(ov, re);
 
-			//		attackType = new Basic(ov, re);
+		//		attackType = new Basic(ov, re);
 		//	d.increaseVisibility(currentY, currentX);
 		//	d.increaseVisibility(currentY+1, currentX);
 		//	d.increaseVisibility(currentY-1, currentX);
 		//	d.increaseVisibility(currentY, currentX+1);
 		//	d.increaseVisibility(currentY, currentX-1);
-			//center(currentX,currentY ) ;
+		//center(currentX,currentY ) ;
 		//	drawIdle(c);
-			log.clear();
-			log.add("You go up the stairs", 5);
+		log.clear();
+		log.add("You go up the stairs", 5);
 	}
 	public void levelUp(Canvas c) {
 		dunFloor++;
 		enemies.clear();
 		loots.clear();
 
-	//	m = null;
+		//	m = null;
 		//	mapSquares = new ArrayList<Bitmap>();
 
 		//	x = y = 0;
 		//	re = r;
 		long temp = d.rand.getSeed();
 		pastSeed.push(temp);
-	//	d = null;
+		//	d = null;
 		d = new Dungeon();
 		//d.printGrid();
 
 		//System.out.println("CONSTRUCTYEFDDD");
 
-	//	tileMap = 
+		//	tileMap = 
 		currentMap = d.grid;;
 
 		startRow = d.startY;
@@ -563,14 +563,14 @@ final public class Map {
 		//	character = new Stats(ov, re);
 
 		//		attackType = new Basic(ov, re);
-	//	d.increaseVisibility(currentY, currentX);
-	//	d.increaseVisibility(currentY+1, currentX);
-	//	d.increaseVisibility(currentY-1, currentX);
-	//	d.increaseVisibility(currentY, currentX+1);
-	//	d.increaseVisibility(currentY, currentX-1);
-	//	center(currentX,currentY ) ;
-	//	m = new MapChunks(ov, re, d.visibility, startRow, startCol);
-	//	currentMap = tileMap;
+		//	d.increaseVisibility(currentY, currentX);
+		//	d.increaseVisibility(currentY+1, currentX);
+		//	d.increaseVisibility(currentY-1, currentX);
+		//	d.increaseVisibility(currentY, currentX+1);
+		//	d.increaseVisibility(currentY, currentX-1);
+		//	center(currentX,currentY ) ;
+		//	m = new MapChunks(ov, re, d.visibility, startRow, startCol);
+		//	currentMap = tileMap;
 		//	map = saveMap(tileMap);	
 		//	startRow = 2;
 		//	startCol = 2;
@@ -580,7 +580,7 @@ final public class Map {
 		//	x = x - xScale*(currentMap.length)+398 + xScale*(startRow-startCol);//+344; 
 		//	y = y - YScale*(startCol+startRow) + 156; 
 		//
-	//	drawIdle(c);
+		//	drawIdle(c);
 		log.clear();
 		log.add("You go down the stairs", 5);
 	}
@@ -594,12 +594,12 @@ final public class Map {
 		m.drawMap(c, button.NONE,false);
 
 		attackType.select(c, pressed, this);
-		
+
 		for (int i =0; i < loots.size(); i++){
 
 			loots.get(i).animate(c, button.NONE, false);
 		}
-		
+
 		sprite.face(c, pressed);
 
 		for (int i =0; i < enemies.size(); i++){
@@ -621,18 +621,18 @@ final public class Map {
 
 		c.drawColor(Color.BLACK);
 		m.drawMap(c, button.NONE,false);
-		
+
 		for (int i =0; i < loots.size(); i++){
 
 			loots.get(i).animate(c, button.NONE, false);
 		}
-		
+
 		sprite.attack(c, lastDirection);
-		
+
 		for (int i =0; i < enemies.size(); i++){
 			enemies.get(i).idle(c);
 		}
-		
+
 		attackType.animate(c);
 
 		Paint p = new Paint();
@@ -646,12 +646,12 @@ final public class Map {
 
 		c.drawColor(Color.BLACK);
 		m.drawMap(c, button.NONE,false);
-		
+
 		for (int i =0; i < loots.size(); i++){
 
 			loots.get(i).animate(c, button.NONE, false);
 		}
-		
+
 		sprite.face(c, direction);
 		for (int i =0; i < enemies.size(); i++){
 			if(enemies.get(i).currentHP <= 0){
@@ -669,7 +669,7 @@ final public class Map {
 		p.setAlpha(220);
 		m.drawWalls(c);
 		//c.drawBitmap(walls, x, y, p);
-		
+
 		if(character.xp >= character.totalXp){
 			character.levelUp();
 			log.add("Congratulations your now level [0]"+ character.level+"[1]![2]", 4);
@@ -684,21 +684,21 @@ final public class Map {
 	private void dropLoots(int xCoord, int yCoord) {
 		// TODO Auto-generated method stub
 		int randInt = new Random().nextInt(10);
-		
-	//	if(randInt < 1){
-	//	loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, true));
-	//	}
-	//	else if(randInt < 3){
-	//		loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, false));
-	//	}
-		
-		
+
+		//	if(randInt < 1){
+		//	loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, true));
+		//	}
+		//	else if(randInt < 3){
+		//		loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, false));
+		//	}
+
+
 		if(randInt < 2){
 			loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, true)); //loot
-			}
-			else if(randInt < 6){
-				loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, false)); //moneys
-			}
+		}
+		else if(randInt < 6){
+			loots.add(new GroundLoot(ov, re, xCoord, yCoord, currentX, currentY, false)); //moneys
+		}
 	}
 
 
@@ -713,12 +713,12 @@ final public class Map {
 
 
 
-	
-	
+
+
 	public void updateHealth(Canvas c, button lastDirection) {
 
 
-		
+
 		c.drawColor(Color.BLACK);
 		m.drawMap(c, button.NONE,false);
 		for (int i =0; i < loots.size(); i++){
@@ -775,49 +775,49 @@ final public class Map {
 
 		}
 	}
-     
+
 
 
 
 	public int checkSpace() {
-    if(validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDD
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDL
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDR
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDT){
-	
-return 0;
-//	levelUp();
+		if(validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDD
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDL
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDR
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRDT){
+
+			return 0;
+			//	levelUp();
+
+		}
+		else if(validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUD
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUL
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUR
+				|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUT){
+
+			return 1;
+			//levelUp();
+		}
+		return -1;
+
 
 	}
-	else if(validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUD
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUL
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUR
-			|| validMove(button.NONE.value, getCurrentX(), getCurrentY())== BlockType.STAIRUT){
-
-		return 1;
-		//levelUp();
-	}
-	return -1;
-
-
-}
 
 
 
 
 	public void loadBitmaps() {
-	//	Bitmap mCBitmap;
-	//	Bitmap map, walls;
-		
+		//	Bitmap mCBitmap;
+		//	Bitmap map, walls;
+
 	}
-	
+
 	public void recycleBitmaps() {
 		//mCBitmap.recycle();
 		if(map != null){
-		map.recycle();
+			map.recycle();
 		}
 		if(walls != null){
-		walls.recycle();
+			walls.recycle();
 		}
-		}
+	}
 }

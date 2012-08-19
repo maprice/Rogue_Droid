@@ -29,15 +29,15 @@ public class Basic extends AttackType{
 		icon = BitmapFactory.decodeResource(r, R.drawable.si_drainlife);
 		attacked = new ArrayList<Posn>();
 		frames = 5;
-		
+
 		height = effect.getHeight() / 1; //5 rows
 		width = effect.getWidth() / 5; //5 columns
 		square = new AttackSquare(ov, r);
 
 		xCenter = 0;
 		yCenter = 0;
-		
+
 		name = "Basic";
 	}
- 
+
 }

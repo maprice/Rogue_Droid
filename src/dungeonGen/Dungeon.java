@@ -508,7 +508,7 @@ public class Dungeon {
 		int num = rand.nextInt(roomList.size());
 		return roomList.get(num);
 	}
-	
+
 	private Direction randomDirection(){
 		int num = rand.nextInt(4);
 		switch(num){

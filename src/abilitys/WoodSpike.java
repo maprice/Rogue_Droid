@@ -35,7 +35,7 @@ public class WoodSpike extends AttackType{
 
 		xCenter = 20;
 		yCenter = -30;
-		
+
 		name = "Wood Spike";
 	}
 

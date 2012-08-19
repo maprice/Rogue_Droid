@@ -30,9 +30,9 @@ public class Sprite {
 	}
 
 	public void walk(Canvas c, button pressed, int frames) {
-		
+
 		if(frames%2 == 1){
-		update(pressed);
+			update(pressed);
 		}
 		int srcY = direction * height;
 		int srcX = currentFrame * width;

@@ -22,9 +22,9 @@ public class Empty extends AttackType{
 	};
 
 	public Empty(OurView ourView, Resources r) {
-		
+
 		empty = true;
-		
+
 		ov = ourView;
 		attackGrid = basic;
 		damage = 0;
@@ -33,15 +33,15 @@ public class Empty extends AttackType{
 		icon = BitmapFactory.decodeResource(r, R.drawable.si_emptyskill);
 		attacked = new ArrayList<Posn>();
 		frames = 5;
-		
+
 		height = effect.getHeight() / 1; //5 rows
 		width = effect.getWidth() / 5; //5 columns
 		square = new AttackSquare(ov, r);
 
 		xCenter = 0;
 		yCenter = 0;
-		
+
 		name = "";
 	}
- 
+
 }

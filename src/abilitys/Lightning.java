@@ -35,7 +35,7 @@ public class Lightning extends AttackType{
 
 		xCenter = 20;
 		yCenter = 0;
-		
+
 		name = "Lightning";
 	}
 
