@@ -14,3 +14,8 @@ right control panel.
 No updates are planned for this game in the future nor will there ever be.  This game was developed to get a feel for mobile development
 and learn about different game loops.  Ideas and code snippets from this game are certain to be implemented in future endeavours however for the time
 being, this project is discontinued.
+
+
+## Screenshots
+![Item Screen](/assets/2013.03.10-13.37.46.jpeg "Item Screen")
+![Game Screen](/assets/2013.03.10-13.46.18.jpeg "Game Screen")
